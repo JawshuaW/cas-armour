@@ -33,8 +33,8 @@ This version is an updated/customized build with fixes, layout improvements, HUD
   <tr>
     <td align="center" width="50%">
       <h3>View All Sets Page</h3>
-      <a href="docs/images/cas-armour-sets.png">
-        <img src="docs/images/cas-armour-sets.png" alt="CAS Armour View All Sets page showing armour sets, bonuses, and equipped pieces" width="420">
+      <a href="images/cas-armour-sets.png">
+        <img src="images/cas-armour-sets.png" alt="CAS Armour View All Sets page showing armour sets, bonuses, and equipped pieces" width="420">
       </a>
       <br>
       <sub>
@@ -43,8 +43,8 @@ This version is an updated/customized build with fixes, layout improvements, HUD
     </td>
     <td align="center" width="50%">
       <h3>Armour Equipment Menu</h3>
-      <a href="docs/images/cas-armour-menu.png">
-        <img src="docs/images/cas-armour-menu.png" alt="CAS Armour equipment menu with armour slots and body connector lines" width="420">
+      <a href="images/cas-armour-menu.png">
+        <img src="images/cas-armour-menu.png" alt="CAS Armour equipment menu with armour slots and body connector lines" width="420">
       </a>
       <br>
       <sub>
