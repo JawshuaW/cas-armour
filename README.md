@@ -26,9 +26,6 @@ This version is an updated/customized build with fixes, layout improvements, HUD
 
 ## 🖼️ Preview Images
 
-> These screenshots are displayed from local repo files so they show properly on GitHub.  
-> Place the images in `docs/images/` using the exact filenames shown below. GitHub can be weird with outside image hosts, because apparently even screenshots need a notarized travel permit.
-
 <table>
   <tr>
     <td align="center" width="50%">
@@ -65,29 +62,6 @@ This version is an updated/customized build with fixes, layout improvements, HUD
     </td>
   </tr>
 </table>
-
-### Image File Names
-
-Save your three screenshots into the repo like this:
-
-```txt
-cas-armour/
-├─ README.md
-└─ docs/
-   └─ images/
-      ├─ cas-armour-sets.png   # Image 1: View All Sets page
-      ├─ cas-armour-menu.png   # Image 2: Main armour menu opened with U or /armor
-      └─ cas-armour-hud.png    # Image 3: Bottom-right equipped armour HUD
-```
-
-Original hosted image links for reference:
-
-```txt
-Image 1 / Sets Page: https://files.catbox.moe/yky5v9.png
-Image 2 / Armour Menu: https://files.catbox.moe/9aib1q.png
-Image 3 / Armour HUD:  https://files.catbox.moe/fomwsa.png
-```
-
 ---
 
 ## ✨ Custom Updates in This Build
