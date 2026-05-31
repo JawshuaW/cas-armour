@@ -1,87 +1,409 @@
-# CAS Armour (RedM)
+<div align="center">
 
-Slot-based equipment and armor system for RedM with NUI drag-and-drop interface. Supports both VORP and RSGCore frameworks.
+# 🛡️ CAS Armour for RedM
 
-## Requirements
-- `vorp_core` or `rsg-core`
-- `vorp_inventory` or `rsg-inventory`
-- `oxmysql`
+### Slot-Based Armour, Equipment, Durability, Stats, Sets, Crafting & NUI UI
 
-## Installation
-1. Import `sql/cas_armour_equipment.sql` into your database.
-2. Keep the resource folder name as `cas-armour`.
-3. Add to `server.cfg`:
+![RedM](https://img.shields.io/badge/RedM-rdr3-red?style=for-the-badge)
+![Framework](https://img.shields.io/badge/Framework-VORP%20%7C%20RSGCore-brown?style=for-the-badge)
+![Database](https://img.shields.io/badge/Database-oxmysql-gold?style=for-the-badge)
+![Status](https://img.shields.io/badge/Version-Custom%20Updated-darkgreen?style=for-the-badge)
+
+</div>
+
+---
+
+## ⚠️ Credit / Ownership Notice
+
+This is **not my original script**.
+
+The original **CAS Armour** resource is credited to **CAS / UIforc**.  
+This repository is my personally updated/customized version for RedM/VORP server use.
+
+The goal of this version is to keep the original armour system intact while adding UI fixes, startup fixes, HUD quality-of-life commands, resolution improvements, and other adjustments for better live-server use.
+
+> Original author credit should remain with **CAS / UIforc** if this edited version is shared or redistributed.
+
+---
+
+## 📌 About This Version
+
+This updated version keeps the main CAS Armour system while improving how it works and displays in-game.
+
+It includes fixes for:
+
+- Armour menu startup/opening issues
+- `/armor` command behavior
+- **U key** menu opening
+- NUI readiness after server restarts
+- 1920x1080 / 2560x1440 layout scaling
+- Floating equipment slot positioning
+- Red connector line behavior
+- Equipped armour HUD placement
+- Player hide/show HUD commands
+- In-menu help hint for armour HUD controls
+
+Basically, the same armour system, but less likely to behave like it was assembled during a saloon brawl.
+
+---
+
+## ✨ Custom Updates Made
+
+### ✅ Menu Opening / Startup Fixes
+
+- Fixed issues where the armour system worked after restart, but `/armor` or **U** would not open the menu properly.
+- Added safer NUI startup/readiness handling.
+- Improved menu opening reliability after full server restarts.
+
+### ✅ Resolution / UI Scaling Fixes
+
+- Improved layout behavior for common player resolutions:
+  - `1920x1080`
+  - `2560x1440`
+- Adjusted the main UI frame so slot placement and line positions scale more consistently.
+- Improved equipment slot positioning and body connector line alignment.
+
+### ✅ Armour HUD Updates
+
+The equipped armour/status HUD was moved away from the minimap and placed in the **bottom-right** of the screen.
+
+Players can now hide, show, or toggle the armour HUD if they do not want it visible.
+
+### ✅ Help Hint Added
+
+A small help message was added inside the armour menu so players know how to hide/show the HUD:
+
+```txt
+Armor HUD: /hidearmor or /hidearmour to hide • /showarmor or /showarmour to show
 ```
+
+---
+
+## 🎮 Player Commands
+
+### Open Armour Menu
+
+```txt
+/armor
+```
+
+The armour menu can also be opened with the configured **U key**.
+
+### Hide Armour HUD
+
+```txt
+/hidearmor
+/hidearmour
+```
+
+### Show Armour HUD
+
+```txt
+/showarmor
+/showarmour
+```
+
+### Toggle Armour HUD
+
+```txt
+/togglearmorhud
+/togglearmourhud
+```
+
+The HUD visibility preference is saved client-side, so if a player hides it, it should stay hidden until they choose to show it again.
+
+---
+
+## 🧩 Requirements
+
+| Requirement | Notes |
+|---|---|
+| `vorp_core` or `rsg-core` | Framework support |
+| `vorp_inventory` or `rsg-inventory` | Inventory support |
+| `oxmysql` | Database support |
+
+---
+
+## 📦 Installation
+
+### 1. Import SQL
+
+Import the included SQL files into your database:
+
+```txt
+sql/cas_armour_equipment.sql
+sql/cas_armour_items.sql
+```
+
+### 2. Resource Folder Name
+
+Keep the folder named exactly:
+
+```txt
+cas-armour
+```
+
+### 3. Add to `server.cfg`
+
+Make sure dependencies are started before this resource:
+
+```cfg
 ensure oxmysql
 ensure vorp_core
 ensure vorp_inventory
 ensure cas-armour
 ```
 
-## Features
+### 4. Restart
+
+```cfg
+restart cas-armour
+```
+
+Or restart the full server if needed.
+
+---
+
+## 🛡️ Main Features
 
 ### Equipment System
-- **10 equipment slots**: head, chest, vest, pants, boots, gloves, belt, amulet, trinket1, trinket2
-- **Drag & drop**: Equip from inventory, unequip back to inventory
-- **Metadata persistence**: Condition/durability stored per item via oxmysql
 
-### Damage Reduction
-- `armorBase` provides baseline reduction across all damage types
-- Category-specific resists: `bulletResist`, `meleeResist`, `animalResist`, `fallResist`, `explosionResist`, `poisonResist`
-- Formula: `reduction% = (armorBase * ArmorBaseToReduction) + categoryResist`, capped at `MaxDamageReductionPercent`
+CAS Armour uses **10 equipment slots**:
 
-### Durability / Wear
-- Taking damage reduces armor condition based on `WearPerDamage`
-- When condition reaches 0, the piece breaks and is removed from the slot
-- Wear is distributed to nearby slots (e.g., torso hit also wears belt/amulet)
+| Slot | Description |
+|---|---|
+| `head` | Head armour |
+| `chest` | Chest armour |
+| `vest` | Vest layer |
+| `pants` | Pants/leg armour |
+| `boots` | Footwear armour |
+| `gloves` | Hand armour |
+| `belt` | Belt equipment |
+| `amulet` | Amulet slot |
+| `trinket1` | Trinket slot 1 |
+| `trinket2` | Trinket slot 2 |
 
-### Set Bonuses
-- 7 armor sets with 5 bonus tiers each (2pc, 4pc, 6pc, 8pc, 10pc)
-- Bonus stats are NOT condition-scaled (always active while equipped)
-- 10-piece bonus grants a unique passive ability per set
+Supports:
 
-### Movement Speed
-- `staminaCostModifier` and `weightPenalty` reduce movement speed
-- Formula: `mult = 1.0 - (staminaCost * StaminaCostToMovePenalty) - weightPenalty`
+- Drag-and-drop NUI interface
+- Equip from inventory
+- Unequip back to inventory
+- Item condition/durability metadata
+- Persistent saved equipment through `oxmysql`
 
-### Environmental Effects
-- **Cold/Heat Resistance**: Reduces core drain in extreme temperatures
-- **Stamina/Deadeye Drain**: Modifies core drain rates
-- **Stealth/Noise**: Reduces NPC hearing/seeing range
-- **Intimidation**: Chance to make aimed NPCs surrender
+---
 
-### Set Passive Abilities
+## ⚔️ Damage Reduction
+
+Armour can reduce multiple damage categories:
+
+| Stat | Purpose |
+|---|---|
+| `armorBase` | General baseline protection |
+| `bulletResist` | Bullet damage resistance |
+| `meleeResist` | Melee damage resistance |
+| `animalResist` | Animal damage resistance |
+| `fallResist` | Fall damage resistance |
+| `explosionResist` | Explosion damage resistance |
+| `poisonResist` | Poison damage resistance |
+
+Formula:
+
+```txt
+reduction% = (armorBase * ArmorBaseToReduction) + categoryResist
+```
+
+Reduction is capped by:
+
+```txt
+MaxDamageReductionPercent
+```
+
+---
+
+## 🔧 Durability / Wear
+
+- Armour condition decreases when taking damage.
+- Broken armour pieces are removed from their equipped slot.
+- Wear can spread across related nearby slots.
+- Example: torso damage can also affect belt or amulet condition.
+
+---
+
+## 🧥 Set Bonuses
+
+Armour sets can provide bonus stats when multiple pieces are equipped.
+
+Set bonuses may activate at different tiers:
+
+```txt
+2 pieces
+4 pieces
+6 pieces
+8 pieces
+10 pieces
+```
+
+Full sets can also grant unique passive abilities.
+
 | Set | Passive | Effect |
-|-----|---------|--------|
+|---|---|---|
 | Wolf | Wolf Detection Reduction | Extra NPC sense reduction |
 | Bear | Bear Charge Resistance | Ragdoll immunity |
-| Outlaw | Bullet Dodge Chance | 15% chance to negate bullet damage |
+| Outlaw | Bullet Dodge Chance | Chance to negate bullet damage |
 | Scholar | Enemy Detection Boost | Blips on hostile NPCs |
 | Snake | Poison Aura | AoE damage to nearby NPCs |
 | Night | Assassination Expertise | Bonus damage on unaware NPCs |
-| Legend | Quickdraw Mastery | 2x intimidation + deadeye recovery |
+| Legend | Quickdraw Mastery | Intimidation and deadeye recovery bonuses |
 
-## Crafting
-- Blacksmith NPCs at configurable locations (default: Valentine, Annesburg, Rhodes)
-- Uses `vorp_menu` for set/piece selection interface
-- Progress bar with animation during crafting
+---
 
-## Configuration
-All tuning values are in `shared/config.lua` under `Config.Tuning`, `Config.WeightPenalty`, `Config.ArmorPieces`, and `Config.ArmorSets`.
+## 🏃 Movement / Weight
 
-## NUI Callbacks
-- `cas_armour:close` - Close the UI
-- `cas_armour:requestData` - Request equipment/inventory data
-- `cas_armour:equip` - Equip an item: `{ pieceId, itemName, itemId, targetSlot, metadata }`
-- `cas_armour:unequip` - Unequip a slot: `{ slot }`
-- `cas_armour:craft` - Craft a piece: `{ pieceId }`
+Armour weight and stamina values can affect movement.
 
-## Exports
+Formula:
 
-**Client:**
-- `exports['cas-armour']:GetEquipment()`
-- `exports['cas-armour']:GetStats()`
-- `exports['cas-armour']:GetActivePassives()`
+```txt
+mult = 1.0 - (staminaCost * StaminaCostToMovePenalty) - weightPenalty
+```
 
-**Server:**
-- `exports['cas-armour']:GetEquipment(source)`
+---
+
+## 🌡️ Environmental Effects
+
+Armour can affect:
+
+- Cold resistance
+- Heat resistance
+- Stamina drain
+- Deadeye drain
+- NPC stealth detection
+- NPC intimidation/surrender chance
+
+---
+
+## 🔨 Crafting
+
+The resource includes armour crafting support.
+
+- Blacksmith crafting locations are configurable.
+- Default examples may include:
+  - Valentine
+  - Annesburg
+  - Rhodes
+- Uses `vorp_menu` for crafting selection.
+- Uses progress bar and animation during crafting.
+
+---
+
+## 🖥️ UI / NUI Improvements
+
+This customized version includes several interface improvements:
+
+- More reliable NUI startup handling
+- Better UI scaling across common resolutions
+- Floating armour slot layout improvements
+- Connector line layer improvements
+- Equipped armour HUD moved to bottom-right
+- Hide/show HUD commands
+- Small command help hint inside the menu
+
+---
+
+## ⚙️ Configuration
+
+Main configuration is located in:
+
+```txt
+shared/config.lua
+```
+
+Important sections may include:
+
+| Config Section | Purpose |
+|---|---|
+| `Config.Tuning` | Main armour/stat tuning |
+| `Config.WeightPenalty` | Weight and movement penalty settings |
+| `Config.ArmorPieces` | Armour item definitions |
+| `Config.ArmorSets` | Set bonus definitions |
+| Crafting locations | Blacksmith/crafting setup |
+| Passive effects | Unique set/passive behavior |
+
+---
+
+## 🔁 NUI Callbacks
+
+Common NUI callbacks include:
+
+```txt
+cas_armour:close
+cas_armour:requestData
+cas_armour:equip
+cas_armour:unequip
+cas_armour:craft
+```
+
+Example payloads:
+
+```txt
+cas_armour:equip
+{ pieceId, itemName, itemId, targetSlot, metadata }
+
+cas_armour:unequip
+{ slot }
+
+cas_armour:craft
+{ pieceId }
+```
+
+---
+
+## 📤 Exports
+
+### Client
+
+```lua
+exports['cas-armour']:GetEquipment()
+exports['cas-armour']:GetStats()
+exports['cas-armour']:GetActivePassives()
+```
+
+### Server
+
+```lua
+exports['cas-armour']:GetEquipment(source)
+```
+
+---
+
+## 📝 Notes
+
+This is an edited/customized version of **CAS Armour** for personal RedM server use.
+
+Original script/resource credit remains with:
+
+```txt
+CAS / UIforc
+```
+
+My changes are focused on:
+
+- Compatibility
+- Usability
+- UI placement
+- Resolution handling
+- Player HUD controls
+- Server restart reliability
+- Quality-of-life improvements
+
+Please keep the original author credit intact if redistributing or publishing an edited copy. Nobody likes the guy who steals a horse, paints it black, and claims he bred it himself.
+
+---
+
+<div align="center">
+
+**Updated for custom RedM/VORP server use.**  
+**Original CAS Armour credit: CAS / UIforc**
+
+</div>
