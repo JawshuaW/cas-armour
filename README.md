@@ -55,8 +55,8 @@ This version is an updated/customized build with fixes, layout improvements, HUD
   <tr>
     <td align="center" colspan="2">
       <h3>Bottom-Right Armour HUD</h3>
-      <a href="docs/images/cas-armour-hud.png">
-        <img src="docs/images/cas-armour-hud.png" alt="CAS Armour bottom-right HUD showing currently equipped armour" width="520">
+      <a href="images/cas-armour-hud.png">
+        <img src="images/cas-armour-hud.png" alt="CAS Armour bottom-right HUD showing currently equipped armour" width="520">
       </a>
       <br>
       <sub>
