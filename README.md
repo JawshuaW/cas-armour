@@ -31,7 +31,7 @@ This version is an updated/customized build with fixes, layout improvements, HUD
 
 <table>
   <tr>
-    <td align="center">
+    <td align="center" width="50%">
       <h3>View All Sets Page</h3>
       <a href="images/cas-armour-sets.png">
         <img src="images/cas-armour-sets.png" alt="CAS Armour View All Sets page showing armour sets, bonuses, and equipped pieces" width="420">
@@ -41,18 +41,6 @@ This version is an updated/customized build with fixes, layout improvements, HUD
         Shows every armour set, what each set does, the set bonuses, and which set pieces are currently equipped.
       </sub>
     </td>
-    <td align="center" colspan="2" width="50%">
-      <h3>Armour Equipment Menu</h3>
-      <a href="images/cas-armour-menu.png">
-        <img src="images/cas-armour-menu.png" alt="CAS Armour equipment menu with armour slots and body connector lines" width="420">
-      </a>
-      <br>
-      <sub>
-        Opens with <code>U</code> or <code>/armor</code>. Allows players to equip armour items and view connector lines to the proper body parts.
-      </sub>
-    </td>
-  </tr>
-  <tr>
     <td align="center" width="50%">
       <h3>Bottom-Right Armour HUD</h3>
       <a href="images/cas-armour-hud.png">
@@ -61,6 +49,18 @@ This version is an updated/customized build with fixes, layout improvements, HUD
       <br>
       <sub>
         Displays currently equipped armour pieces and their condition in the bottom-right of the screen. Players can hide or show this HUD with commands.
+      </sub>
+    </td>
+  </tr>
+  <tr>
+	<td align="center" colspan="2">
+      <h3>Armour Equipment Menu</h3>
+      <a href="images/cas-armour-menu.png">
+        <img src="images/cas-armour-menu.png" alt="CAS Armour equipment menu with armour slots and body connector lines" width="420">
+      </a>
+      <br>
+      <sub>
+        Opens with <code>U</code> or <code>/armor</code>. Allows players to equip armour items and view connector lines to the proper body parts.
       </sub>
     </td>
   </tr>
